@@ -1,0 +1,11 @@
+def subarraysWithSumK(a: [int], b: int) -> int:
+    d={0:1}
+    valXor=0
+    cnt=0
+    for i in range(len(a)):
+        valXor=valXor^a[i]
+        target=valXor^b
+        if target in d:
+            cnt=cnt+d[target]
+        d[valXor]=d.get(valXor,0)+1
+    return cnt
