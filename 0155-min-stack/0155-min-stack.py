@@ -3,26 +3,33 @@ class MinStack:
 
     def __init__(self):
         self.st=LifoQueue()
+        self.min=math.inf
         
 
     def push(self, val: int) -> None:
-        if self.st.empty():
-            self.st.put([val,val])
-        else:
-            self.st.put([val,min(val,self.st.queue[-1][1])])
+        self.min=min(self.min,val)
+        self.st.put([val,self.min])
+        
+        
         
 
     def pop(self) -> None:
-        value,minimum=self.st.get()
+        value,mininum=self.st.get()
+        if not self.st.empty():
+            self.min=self.st.queue[-1][1]
+        else:
+            self.min=math.inf
         return value
         
 
     def top(self) -> int:
         return self.st.queue[-1][0]
         
+        
 
     def getMin(self) -> int:
         return self.st.queue[-1][1]
+        
         
 
 
