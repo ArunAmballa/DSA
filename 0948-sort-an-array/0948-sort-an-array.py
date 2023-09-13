@@ -16,8 +16,10 @@ class Solution:
         while j<=hi:
             temp.append(nums[j])
             j=j+1
+        #Copying temporaray array  to original array
         for i in range(lo,hi+1):
             nums[i]=temp[i-lo]
+        
 
     def mergeSort(self,nums,lo,hi):
         if lo>=hi:
@@ -26,7 +28,6 @@ class Solution:
         self.mergeSort(nums,lo,mid)
         self.mergeSort(nums,mid+1,hi)
         self.merge(nums,lo,mid,hi)
-    
     def sortArray(self, nums: List[int]) -> List[int]:
         self.mergeSort(nums,0,len(nums)-1)
         return nums
