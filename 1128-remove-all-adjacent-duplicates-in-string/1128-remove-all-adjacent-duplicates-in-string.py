@@ -1,18 +1,14 @@
-from queue import LifoQueue
 class Solution:
     def removeDuplicates(self, s: str) -> str:
         st=[]
-        for i in range(0,len(s)):
-            if not st:
-                st.append(s[i])
-            elif s[i]==st[-1]:
+        for i in range(len(s)):
+            if st and st[-1]==s[i]:
                 st.pop()
             else:
                 st.append(s[i])
-        s=''
+        ans=""
         while st:
-            s=s+st[-1]
-            st.pop()
-        return s[::-1]
+            ans=ans+ st.pop()
+        return ans[::-1]
 
         
