@@ -3,6 +3,7 @@ class Solution:
         lo=0
         n=len(nums)
         hi=n-1
+        #You will forget this edge case
         if n==1:
             return nums[0]
         if nums[0]!=nums[1]:return nums[0]
