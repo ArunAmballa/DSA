@@ -1,8 +1,8 @@
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
-        lo=0
+        lo=1
         n=len(nums)
-        hi=n-1
+        hi=n-2
         #You will forget this edge case
         if n==1:
             return nums[0]
