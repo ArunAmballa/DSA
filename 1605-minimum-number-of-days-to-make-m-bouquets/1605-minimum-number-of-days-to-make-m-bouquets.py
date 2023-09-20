@@ -10,11 +10,7 @@ class Solution:
                     cnt=0
             else:
                 cnt=0
-        if groups>=m:
-            return True
-        else:
-            return False
-
+        return groups
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
         if m*k>len(bloomDay):
             return -1
@@ -24,7 +20,7 @@ class Solution:
         ans=maxi
         while lo<=hi:
             mid=lo+(hi-lo)//2
-            if self.helper(bloomDay,mid,k,m)==True:
+            if self.helper(bloomDay,mid,k,m)>=m:
                 ans=mid
                 hi=mid-1
             else:
