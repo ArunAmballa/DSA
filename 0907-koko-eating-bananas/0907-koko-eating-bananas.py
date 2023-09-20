@@ -7,8 +7,9 @@ class Solution:
         return cnt
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         lo=1
-        ans=max(piles)
-        hi=max(piles)
+        maxi=max(piles)
+        ans=maxi
+        hi=maxi
         while lo<=hi:
             mid=lo+(hi-lo)//2
             if self.helper(piles,mid)<=h:
