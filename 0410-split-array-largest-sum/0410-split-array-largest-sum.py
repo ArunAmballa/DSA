@@ -10,6 +10,8 @@ class Solution:
                 subArraySum=nums[i]
         return subArrays
     def splitArray(self, nums: List[int], k: int) -> int:
+        if k>len(nums):
+            return -1
         lo=max(nums)
         hi=sum(nums)
         ans=-1
