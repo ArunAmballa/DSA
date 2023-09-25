@@ -9,11 +9,11 @@ class Solution:
             if i>ind and candidates[i]==candidates[i-1]:
                 continue
             if candidates[i]>target:
-                break 
+                break
             l=l+[candidates[i]]
             self.generate(candidates,i+1,target-candidates[i],l,ans)
             l.pop()
-        return ans
+        return ans 
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         candidates.sort()
         return self.generate(candidates,0,target,[],[])
