@@ -10,5 +10,5 @@ class Solution:
             if n&(1<<i)!=0:
                 ans=ans*x
             x=x*x
-        return ans if n>0 else ans
+        return ans
         
