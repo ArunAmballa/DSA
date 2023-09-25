@@ -4,7 +4,7 @@ class Solution:
             ans.append(l.copy())
             return 
         #Take Case
-        l.append(nums[i])
+        l=l+[nums[i]]
         self.check(nums,i+1,l,ans)
         l.pop()
         # Dont Take Case
