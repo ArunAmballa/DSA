@@ -12,5 +12,4 @@ class Solution:
             nums[i],nums[ind]=nums[ind],nums[i]
         return ans
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()
         return self.generate(nums,[],0)
