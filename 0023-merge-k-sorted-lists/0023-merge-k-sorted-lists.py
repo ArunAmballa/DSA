@@ -22,19 +22,16 @@ class Solution:
         return dummy.next
     def helper(self,lists,last):
         while last!=0:
-            j=last
             i=0
+            j=last
             while i<j:
                 lists[i]=self.merge(lists[i],lists[j])
-                j=j-1
                 i=i+1
+                j=j-1
                 if i>=j:
                     last=j
         return lists[0]
-        
-
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         if not lists:return None
         return self.helper(lists,len(lists)-1)
-
         
