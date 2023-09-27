@@ -1,19 +1,13 @@
 class Solution:
-    def generate(self,nums,l,d,ans):
-        if len(l)==len(nums):
-            ans.append(l.copy())
+    def generate(self,nums,ans,ind):
+        if ind==len(nums):
+            ans.append(nums.copy())
             return 
-        for i in range(0,len(nums)):
-            if d[i]==-1:
-                d[i]=1
-                l=l+[nums[i]]
-                self.generate(nums,l,d,ans)
-                d[i]=-1
-                l.pop()
+        for i in range(ind,len(nums)):
+            nums[i],nums[ind]=nums[ind],nums[i]
+            self.generate(nums,ans,ind+1)
+            nums[i],nums[ind]=nums[ind],nums[i]
         return ans
-
-
     def permute(self, nums: List[int]) -> List[List[int]]:
-        d={i:-1 for i in range(0,len(nums))}
-        return self.generate(nums,[],d,[])
+        return self.generate(nums,[],0)
         
