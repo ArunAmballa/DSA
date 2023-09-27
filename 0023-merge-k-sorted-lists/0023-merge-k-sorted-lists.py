@@ -4,20 +4,34 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        if not lists:return None
-        h=[]
-        for i in range(len(lists)):
-            if lists[i]:
-                heapq.heappush(h,(lists[i].val,i))
+    def merge(self,head1,head2):
         dummy=ListNode(-1)
         temp=dummy
-        while h:
-            val,index=heapq.heappop(h)
-            temp.next=lists[index]
+        while head1!=None and head2!=None:
+            if head1.val<=head2.val:
+                temp.next=head1
+                head1=head1.next
+            else:
+                temp.next=head2
+                head2=head2.next
             temp=temp.next
-            if lists[index].next!=None:
-                heapq.heappush(h,(lists[index].next.val,index))
-                lists[index]=lists[index].next
+        if head1!=None:
+            temp.next=head1
+        if head2!=None:
+            temp.next=head2
         return dummy.next
+    def helper(self,lists,last):
+        if last==0:
+            return lists[0]
+        i=0
+        j=last
+        while i<j:
+            lists[i]=self.merge(lists[i],lists[j])
+            i=i+1
+            j=j-1
+        return self.helper(lists,j)
+
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        if not lists:return None
+        return self.helper(lists,len(lists)-1)
         
