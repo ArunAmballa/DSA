@@ -1,27 +1,30 @@
 class Node:
-    def __init__(self,key,val):
-        self.key=key
-        self.val=val
+    def __init__(self,key,value):
+        self.key=key 
+        self.val=value 
         self.next=None
 class MyHashMap:
 
     def __init__(self):
-        self.d=[Node(-1,-1) for i in range(0,10000)]
-    
-    def hash(self,key):
-        return key%len(self.d)
+        self.map=[Node(-1,-1) for i in range(1000)]
         
+    def hash(self,key):
+        return key%1000
+
     def put(self, key: int, value: int) -> None:
-        curr=self.d[self.hash(key)]
-        while curr.next!=None:
-            if curr.next.key==key:
-                curr.next.val=value
+        curr=self.map[self.hash(key)]
+        temp=curr
+        while curr!=None:
+            if curr.key==key:
+                curr.val=value
                 return
             curr=curr.next
-        curr.next=Node(key,value)
-        
+        newNode=Node(key,value)
+        newNode.next=temp.next
+        temp.next=newNode
+    
     def get(self, key: int) -> int:
-        curr=self.d[self.hash(key)]
+        curr=self.map[self.hash(key)]
         while curr!=None:
             if curr.key==key:
                 return curr.val
@@ -29,12 +32,14 @@ class MyHashMap:
         return -1
 
     def remove(self, key: int) -> None:
-        curr=self.d[self.hash(key)]
-        while curr.next:
+        curr=self.map[self.hash(key)]
+        while curr!=None:
+            if curr.next==None:
+                return
             if curr.next.key==key:
                 curr.next=curr.next.next
-                return 
             curr=curr.next
+    
         
 
 
