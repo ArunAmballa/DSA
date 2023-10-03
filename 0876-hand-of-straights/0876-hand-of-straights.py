@@ -6,19 +6,17 @@ class Solution:
         d={}
         for i in range(len(hand)):
             d[hand[i]]=d.get(hand[i],0)+1
-        h=list(d.keys())
-        heapq.heapify(h)
-        while h:
-            smallest=h[0]
-            for num in range(smallest,smallest+groupSize):
-                if num not in d:
+        minHeap=list(d.keys())
+        heapq.heapify(minHeap)
+        while minHeap:
+            smallest=minHeap[0]
+            for i in range(smallest,smallest+groupSize):
+                if i not in d:
                     return False
-                d[num]=d[num]-1
-                if d[num]==0:
-                    if num!=h[0]:
+                d[i]=d[i]-1
+                if d[i]==0:
+                    if i!=minHeap[0]:
                         return False
-                    heapq.heappop(h)
+                    heapq.heappop(minHeap)
         return True
-
-
         
