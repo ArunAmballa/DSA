@@ -15,6 +15,7 @@ class Solution:
                     return False
                 d[num]=d[num]-1
                 if d[num]==0:
+                    del d[num]
                     if num!=h[0]:
                         return False
                     heapq.heappop(h)
