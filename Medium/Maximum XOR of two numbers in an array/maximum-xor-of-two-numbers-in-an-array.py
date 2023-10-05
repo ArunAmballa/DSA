@@ -27,11 +27,11 @@ class Solution:
     def max_xor(self, arr, n):
         maxLen=len(bin(max(arr)))-2
         obj=Trie()
-        for i in range(len(arr)):
-            obj.insert(arr[i],maxLen)
         ans=0
         for i in range(len(arr)):
-            ans=max(ans,obj.getMax(arr[i],maxLen))
+            obj.insert(arr[i],maxLen)
+            if i>0:
+                ans=max(ans,obj.getMax(arr[i],maxLen))
         return ans
        
 
