@@ -1,17 +1,22 @@
-import heapq
+from collections import Counter
+from heapq import heappush, heappop
+
+
+class Pair:
+    def __init__(self, word, freq):
+        self.word = word
+        self.freq = freq
+
+    def __lt__(self, p):
+        return self.freq < p.freq or (self.freq == p.freq and self.word > p.word)
+
+
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        words.sort()
-        d={}
-        for i in range(len(words)):
-            d[words[i]]=d.get(words[i],0)+1
-        ind=0
-        h=[]
-        for i in d:
-            heapq.heappush(h,(-d[i],i))
-        ans=[]
-        while len(ans)!=k:
-            count,word=heapq.heappop(h)
-            ans.append(word)
-        return ans
-
+        cnt = Counter(words)
+        h = []
+        for word, freq in cnt.items():
+            heappush(h, Pair(word, freq))
+            if len(h) > k:
+                heappop(h)
+        return [p.word for p in sorted(h, reverse=True)]
