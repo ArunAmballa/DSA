@@ -14,12 +14,13 @@ class Trie:
         curr.endOfword=True
     def search(self,word,root):
         curr=root
+        if curr==None:
+            return False
         for i in range(len(word)):
             if word[i]==".":
                 for child in curr.children:
                     if self.search(word[i+1:],curr.children[child])==True:
                         return True
-                        break
                 return False
             if word[i] not in curr.children:
                 return False
