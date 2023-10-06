@@ -19,8 +19,9 @@ class Trie:
                 for child in curr.children:
                     if self.search(word[i+1:],curr.children[child])==True:
                         return True
+                        break
                 return False
-            elif word[i] not in curr.children:
+            if word[i] not in curr.children:
                 return False
             else:
                 curr=curr.children[word[i]]
