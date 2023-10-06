@@ -1,44 +1,26 @@
-class TrieNode:
-    def __init__(self) -> None:
-        self.children={}
-        self.endOfword=False
-class Trie:
-    def __init__(self):
-        self.root=TrieNode()
-    def insert(self,word):
-        curr=self.root
-        for c in word:
-            if c not in curr.children:
-                curr.children[c]=TrieNode()
-            curr=curr.children[c]
-        curr.endOfword=True
-    def search(self,word,root):
-        curr=root
-        for i in range(len(word)):
-            if word[i]==".":
-                for child in curr.children:
-                    if self.search(word[i+1:],curr.children[child])==True:
-                        return True
-                return False
-            if word[i] not in curr.children:
-                return False
-            else:
-                curr=curr.children[word[i]]
-        return curr.endOfword
 class WordDictionary:
 
     def __init__(self):
-        self.obj=Trie()
+        self.root = {}
         
     def addWord(self, word: str) -> None:
-        self.obj.insert(word)
-
-    def search(self, word: str) -> bool:
-        return self.obj.search(word,self.obj.root)
+        node = self.root
+        for c in word:
+            if c not in node: node[c] = {}
+            node = node[c]
+        node['*'] = False
         
-
-
-# Your WordDictionary object will be instantiated and called as such:
-# obj = WordDictionary()
-# obj.addWord(word)
-# param_2 = obj.search(word)
+    def search(self, w: str) -> bool:
+    	def dfs(node, i):
+    		if node == False: return False
+    		if i == L: return '*' in node
+    		if w[i] != '.':
+    			if w[i] not in node: return False
+    			return dfs(node[w[i]],i+1)
+    		for j in node.values():
+    			if dfs(j,i+1): return True
+    		return False
+    	node, L = self.root, len(w)
+    	return dfs(node,0)
+		
+		
