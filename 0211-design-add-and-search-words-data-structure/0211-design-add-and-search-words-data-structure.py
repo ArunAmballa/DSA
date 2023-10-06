@@ -22,7 +22,7 @@ class Trie:
                     if self.search(word[i+1:],curr.children[child])==True:
                         return True
                 return False
-            if word[i] not in curr.children:
+            elif word[i] not in curr.children:
                 return False
             else:
                 curr=curr.children[word[i]]
