@@ -1,10 +1,15 @@
-import heapq
 class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
-        h=[]
-        for i in range(0,k):
-            heapq.heappush(h,nums[i])
-        for i in range(k,len(nums)):
-            if nums[i]>h[0]:
-                heapq.heapreplace(h,nums[i])
-        return h[0]
+    def findKthLargest(self, nums, k):
+        pivot = nums[0]
+        
+        left = [num for num in nums if num < pivot]
+        equal = [num for num in nums if num == pivot]
+        right = [num for num in nums if num > pivot]
+        
+        if k <= len(right): return self.findKthLargest(right, k)
+        elif len(right) < k <= len(right) + len(equal): return equal[0]
+        else: return self.findKthLargest(left, k - len(right) - len(equal))
+
+# Average Time Complexity: O(N)
+# Worst Case Time Complexity: O(N^2)
+# Space Complexity: O(N)
