@@ -1,16 +1,29 @@
 #User function Template for python3
-import heapq
+
 class Solution:
+    def partition(self,nums,lo,hi):
+        pivot=nums[lo]
+        i=lo
+        j=hi
+        while i<j:
+            while i<hi and nums[i]<=pivot:
+                i=i+1
+            while j>lo and nums[j]>pivot:
+                j=j-1
+            if i<j:
+                nums[i],nums[j]=nums[j],nums[i]
+        nums[lo],nums[j]=nums[j],nums[lo]
+        return j
+    def QuickSelect(self,nums,lo,hi,k):
+        pIndex=self.partition(nums,lo,hi)
+        if pIndex==k:
+            return nums[pIndex]
+        elif k<pIndex:
+            return self.QuickSelect(nums,lo,pIndex-1,k)
+        else:
+            return self.QuickSelect(nums,pIndex+1,hi,k)
     def kthSmallest(self,arr, l, r, k):
-        h=[]
-        for i in range(0,k):
-            heapq.heappush(h,-arr[i])
-        for i in range(k,len(arr)):
-            if arr[i]<abs(h[0]):
-                heapq.heapreplace(h,-arr[i])
-        return abs(h[0])
-                
-        
+        return self.QuickSelect(arr,0,r,k-1)
 
 
 #{ 
