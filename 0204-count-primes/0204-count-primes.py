@@ -5,7 +5,7 @@ class Solution:
         primes=[0]*(n)
         primes[0]=-1
         primes[1]=-1
-        for i in range(2,int(math.sqrt(n))+1):
+        for i in range(2,int(n**0.5)+1):
             if primes[i]==0:
                 j=i*i
                 while j<n:
