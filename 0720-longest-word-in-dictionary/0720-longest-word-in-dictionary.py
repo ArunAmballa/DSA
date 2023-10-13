@@ -12,28 +12,29 @@ class Trie:
                 curr.children[c]=TrieNode()
             curr=curr.children[c]
         curr.endOfWord=True
-    def complete(self,word):
+    
+    def search(self,word):
         curr=self.root
         for c in word:
-            if c not in curr.children:
-                return False
-            else:
+            if c in curr.children:
                 curr=curr.children[c]
                 if curr.endOfWord==False:
                     return False
-        return True
+            else:
+                return False
+        return curr.endOfWord
+
 
 class Solution:
     def longestWord(self, words: List[str]) -> str:
         obj=Trie()
-        for i in range(len(words)):
-            obj.insert(words[i])
+        for word in words:
+            obj.insert(word)
         ans=""
-        for i in range(len(words)):
-            if obj.complete(words[i]):
-                if len(words[i])>len(ans) or (len(words[i])==len(ans) and words[i]<ans):
-                    ans=words[i]
+        for word in words:
+            if obj.search(word)==True:
+                if (len(word)>len(ans)) or (len(word)==len(ans) and word<ans):
+                    ans=word
         return ans
-
 
         
