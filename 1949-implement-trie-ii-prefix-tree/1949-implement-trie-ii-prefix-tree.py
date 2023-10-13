@@ -1,55 +1,50 @@
 class TrieNode:
     def __init__(self):
-        self.children=[None]*26
-        self.endsWith=0
-        self.countPrefix=0
+        self.children={}
+        self.prefixCount=0
+        self.wordCount=0
 class Trie:
 
     def __init__(self):
         self.root=TrieNode()
         
-
     def insert(self, word: str) -> None:
         curr=self.root
         for c in word:
-            index=ord(c)-ord('a')
-            if curr.children[index]==None:
-                curr.children[index]=TrieNode()
-            curr=curr.children[index]
-            curr.countPrefix=curr.countPrefix+1
-        curr.endsWith=curr.endsWith+1
-        
+            if c not in curr.children:
+                curr.children[c]=TrieNode()
+            curr=curr.children[c]
+            curr.prefixCount=curr.prefixCount+1
+        curr.wordCount=curr.wordCount+1
 
     def countWordsEqualTo(self, word: str) -> int:
         curr=self.root
         for c in word:
-            index=ord(c)-ord('a')
-            if curr.children[index]==None:
+            if c in curr.children:
+                curr=curr.children[c]
+            else:
                 return 0
-            curr=curr.children[index]
-        return curr.endsWith
-
-        
-
+        return curr.wordCount
+            
     def countWordsStartingWith(self, prefix: str) -> int:
         curr=self.root
         for c in prefix:
-            index=ord(c)-ord('a')
-            if curr.children[index]==None:
+            if c in curr.children:
+                curr=curr.children[c]
+            else:
                 return 0
-            curr=curr.children[index]
-        return curr.countPrefix
-        
+        return curr.prefixCount
 
+    
     def erase(self, word: str) -> None:
         curr=self.root
         for c in word:
-            index=ord(c)-ord('a')
-            if curr.children[index]==None:
-                return
-            curr=curr.children[index]
-            curr.countPrefix=curr.countPrefix-1
-        curr.endsWith=curr.endsWith-1
+            if c in curr.children:
+                curr=curr.children[c]
+                curr.prefixCount=curr.prefixCount-1
+            else:
+                return 
+        curr.wordCount=curr.wordCount-1
         
 
 
