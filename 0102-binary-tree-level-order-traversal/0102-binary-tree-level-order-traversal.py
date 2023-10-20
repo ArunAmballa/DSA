@@ -4,20 +4,22 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from queue import Queue
 class Solution:
-    # DFS
-    def helper(self,root,levels,level):
-        if root==None:
-            return None
-        if len(levels)==level:
-            levels.append([])
-        levels[level].append(root.val)
-        self.helper(root.left,levels,level+1)
-        self.helper(root.right,levels,level+1)
-        return levels
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         levels=[]
         if root==None:
             return levels
-        return self.helper(root,levels,0)
+        q=Queue()
+        q.put([root,0])
+        while not q.empty():
+            curr,level=q.get()
+            if level==len(levels):
+                levels.append([])
+            levels[level].append(curr.val)
+            if curr.left!=None:
+                q.put([curr.left,level+1])
+            if curr.right!=None:
+                q.put([curr.right,level+1])
+        return levels
         
