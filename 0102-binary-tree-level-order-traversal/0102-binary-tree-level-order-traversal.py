@@ -5,16 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # DFS
     def helper(self,root,levels,level):
         if root==None:
             return None
         if len(levels)==level:
             levels.append([])
         levels[level].append(root.val)
-        if root.left!=None:
-            self.helper(root.left,levels,level+1)
-        if root.right!=None:
-            self.helper(root.right,levels,level+1)
+        self.helper(root.left,levels,level+1)
+        self.helper(root.right,levels,level+1)
         return levels
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         levels=[]
