@@ -4,30 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from queue import Queue
 class Solution:
+    def helper(self,root,levels,level):
+        if root==None:
+            return None
+        if len(levels)==level:
+            levels.append([])
+        levels[level].append(root.val)
+        if root.left!=None:
+            self.helper(root.left,levels,level+1)
+        if root.right!=None:
+            self.helper(root.right,levels,level+1)
+        return levels
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if root==None:return []
-        q=Queue()
-        q.put(root)
-        q.put(None)
-        ans=[]
-        l=[]
-        while q.empty()==False:
-            curr=q.get()
-            if curr==None:
-                if q.empty()==True:
-                    ans.append(l.copy())
-                    l.clear()
-                    break
-                else:
-                    q.put(None)
-                ans.append(l.copy())
-                l.clear()
-            else:
-                l.append(curr.val)
-                if curr.left!=None:
-                    q.put(curr.left)
-                if curr.right!=None:
-                    q.put(curr.right)
-        return ans 
+        levels=[]
+        if root==None:
+            return levels
+        return self.helper(root,levels,0)
+        
