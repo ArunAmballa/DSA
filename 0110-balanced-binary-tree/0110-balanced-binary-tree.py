@@ -9,12 +9,17 @@ class Solution:
         if root==None:
             return 0
         lh=self.height(root.left)
+        if lh==-1:
+            return -1
         rh=self.height(root.right)
+        if rh==-1:
+            return -1
+        if (abs(lh-rh))>1:
+            return -1
         return max(lh,rh)+1
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         if root==None:
             return True
-        isLeft=self.isBalanced(root.left)
-        isRight=self.isBalanced(root.right)
-        isRoot=True if (abs(self.height(root.left)-self.height(root.right))<=1) else False
-        return (isLeft and isRight and isRoot)
+        ans=self.height(root)
+        return False if ans==-1 else True
+        
