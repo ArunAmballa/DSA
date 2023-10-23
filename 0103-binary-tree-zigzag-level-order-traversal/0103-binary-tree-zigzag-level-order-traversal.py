@@ -15,9 +15,9 @@ class Solution:
         while not q.empty():
             n=q.qsize()
             l=[-1]*n
-            for i in range(q.qsize()):
+            for i in range(n):
                 curr,level=q.get()
-                index=i if level%2==0 else n-i-1
+                index=i if level%2==0 else  n-i-1
                 l[index]=curr.val
                 if curr.left!=None:
                     q.put([curr.left,level+1])
@@ -25,7 +25,4 @@ class Solution:
                     q.put([curr.right,level+1])
             levels.append(l)
         return levels
-        
-
-        
         
