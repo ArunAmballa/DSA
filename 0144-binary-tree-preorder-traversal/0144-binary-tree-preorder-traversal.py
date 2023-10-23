@@ -17,8 +17,8 @@ class Solution:
                 while pred.right!=None and pred.right!=curr:
                     pred=pred.right
                 if pred.right==None:
-                    preorder.append(curr.val)
                     pred.right=curr
+                    preorder.append(curr.val)
                     curr=curr.left
                 else:
                     pred.right=None
