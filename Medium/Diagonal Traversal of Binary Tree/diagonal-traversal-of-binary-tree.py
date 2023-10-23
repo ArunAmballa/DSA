@@ -9,28 +9,27 @@ class Node:
         self.right = None
 '''
 #Complete the function below
+from queue import Queue
 class Solution:
-    def helper(self,root,level,d):
+    def helper(self,root,level,levels):
         if root==None:
             return None
-        self.min_level=min(self.min_level,level)
-        self.max_level=max(self.max_level,level)
-        if level not in d:
-            d[level]=[]
-        d[level].append(root.data)
-        self.helper(root.left,level-1,d)
-        self.helper(root.right,level,d)
+        if len(levels)==level:
+            levels.append([])
+        levels[level].append(root.data)
+        self.helper(root.left,level+1,levels)
+        self.helper(root.right,level,levels)
+        return levels
+    
     def diagonal(self,root):
+        levels=[]
         if root==None:
-            return []
-        d={}
-        self.min_level=0
-        self.max_level=0
-        self.helper(root,0,d)
+            return levels
+        levels=self.helper(root,0,levels)
         ans=[]
-        for i in range(self.max_level,self.min_level-1,-1):
-            for j in range(len(d[i])):
-                ans.append(d[i][j])
+        for i in range(len(levels)):
+            for j in range(len(levels[i])):
+                ans.append(levels[i][j])
         return ans
 
 
