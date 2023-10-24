@@ -11,7 +11,7 @@ class Solution:
         currSum=currSum+root.val
         l=l+[root.val]
         if root.left==None and root.right==None and currSum==targetSum:
-            ans.append(l.copy())
+            ans.append(l)
             return ans
         self.helper(root.left,targetSum,currSum,l,ans)
         self.helper(root.right,targetSum,currSum,l,ans)
