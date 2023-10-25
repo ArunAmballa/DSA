@@ -17,6 +17,7 @@ class Solution:
         self.helper(root.right,preSum,d,targetSum)
         d[preSum]=d[preSum]-1
         
+        
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         d={0:1}
         self.ans=0
