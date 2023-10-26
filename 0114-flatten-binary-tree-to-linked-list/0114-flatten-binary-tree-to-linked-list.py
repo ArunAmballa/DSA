@@ -6,20 +6,20 @@
 #         self.right = right
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
-        if root==None or (root.left==None and root.right==None):
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if root==None:
+            return None
+        if root.left==None and root.right==None:
             return root
-        curr=root
-        while curr!=None:
-            if curr.left==None:
-                curr=curr.right
-            else:
-                pred=curr.left
-                while pred.right!=None:
-                    pred=pred.right
-                if pred.right==None:
-                    pred.right=curr.right
-                    curr.right=curr.left
-                    curr.left=None
-        return root
-        
+        leftTree=self.flatten(root.left)
+        rightTree=self.flatten(root.right)
+        if leftTree!=None:
+            leftTree.right=root.right
+            root.right=root.left
+            root.left=None
+        if rightTree==None:
+            return leftTree
+        return rightTree
         
