@@ -8,23 +8,22 @@ class Node:
 # your task is to complete this function
 # function should return True is Tree is SumTree else return False
 class Solution:
-    def sumTree(self,root):
+    def findSum(self,root):
         if root==None:
             return 0
-        left_sum=self.sumTree(root.left)
-        right_sum=self.sumTree(root.right)
-        return left_sum+right_sum+root.data
+        leftSum=self.findSum(root.left)
+        rightSum=self.findSum(root.right)
+        return leftSum+rightSum+root.data
     def isSumTree(self,root):
         if root==None:
-            return 1
+            return True
         if root.left==None and root.right==None:
-            return 1
-        left_ans=self.isSumTree(root.left)
-        right_ans=self.isSumTree(root.right)
-        curr_ans=1 if (self.sumTree(root.left)+self.sumTree(root.right)==root.data) else 0
-        return left_ans and right_ans and curr_ans
+            return True
+        leftCheck=self.isSumTree(root.left)
+        rightCheck=self.isSumTree(root.right)
+        currCheck=True if self.findSum(root.left)+self.findSum(root.right)==root.data else False
+        return leftCheck and rightCheck and currCheck
         
-         
 
 
 
