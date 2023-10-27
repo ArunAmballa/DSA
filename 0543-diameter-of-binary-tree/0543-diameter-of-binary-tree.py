@@ -10,10 +10,13 @@ class Solution:
             return 0
         lh=self.height(root.left)
         rh=self.height(root.right)
-        self.diameter=max(self.diameter,lh+rh)
         return max(lh,rh)+1
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        self.diameter=0
-        self.height(root)
-        return self.diameter
+        if root==None:
+            return 0
+        leftAns=self.diameterOfBinaryTree(root.left)
+        rightAns=self.diameterOfBinaryTree(root.right)
+        currAns=self.height(root.left)+self.height(root.right)
+        return max(leftAns,max(rightAns,currAns))
+
         
