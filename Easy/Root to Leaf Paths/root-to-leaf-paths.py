@@ -15,12 +15,12 @@ def helper(root,l,ans):
     l=l+[root.data]
     if root.left==None and root.right==None:
         ans.append(l)
+        return 
     helper(root.left,l,ans)
     helper(root.right,l,ans)
     return ans
 def Paths(root):
     return helper(root,[],[])
-   
 
 
 #{ 
