@@ -21,4 +21,4 @@ class Solution:
             return rightAns
         if rightAns==None:
             return leftAns
-        return root
+        
