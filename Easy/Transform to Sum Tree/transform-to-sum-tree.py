@@ -9,23 +9,20 @@ class Node:
         self.right = None
 '''
 class Solution:
-    
-    def sumTree(self,root):
+    def findSum(self,root):
         if root==None:
             return 0
         if root.left==None and root.right==None:
             temp=root.data
             root.data=0
             return temp
-        left_sum=self.sumTree(root.left)
-        right_sum=self.sumTree(root.right)
+        leftSum=self.findSum(root.left)
+        rightSum=self.findSum(root.right)
         temp=root.data
-        root.data=left_sum+right_sum
-        return root.data+temp
-    
+        root.data=leftSum+rightSum
+        return leftSum+rightSum+temp
     def toSumTree(self, root) :
-        self.sumTree(root)
-        return root
+        return self.findSum(root)
 
 
 #{ 
