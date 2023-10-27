@@ -7,6 +7,8 @@
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         inorder=[]
+        if root==None:
+            return inorder
         curr=root
         while curr!=None:
             if curr.left==None:
@@ -20,8 +22,8 @@ class Solution:
                     pred.right=curr
                     curr=curr.left
                 else:
-                    pred.right=None
                     inorder.append(curr.val)
+                    pred.right=None
                     curr=curr.right
         return inorder
         
