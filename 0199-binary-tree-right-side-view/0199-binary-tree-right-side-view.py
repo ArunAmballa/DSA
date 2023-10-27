@@ -9,7 +9,7 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         levels=[]
         if root==None:
-            return []
+            return levels
         q=Queue()
         q.put([root,0])
         while not q.empty():
@@ -21,5 +21,3 @@ class Solution:
             if curr.left!=None:
                 q.put([curr.left,level+1])
         return levels
-
-        
