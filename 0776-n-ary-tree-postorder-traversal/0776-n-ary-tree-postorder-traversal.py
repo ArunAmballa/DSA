@@ -7,15 +7,16 @@ class Node:
 """
 
 class Solution:
-    def order(self,root,ans):
-        if root==None:
-            return None
-        for i in range(len(root.children)):
-            self.order(root.children[i],ans)
-        ans.append(root.val)
-        return ans
     def postorder(self, root: 'Node') -> List[int]:
-        return self.order(root,[])
-        
-        
+        if root==None:
+            return []
+        st=[root]
+        postOrder=[]
+        while st:
+            curr=st.pop()
+            postOrder.append(curr.val)
+            for i in range(len(curr.children)):
+                if curr.children[i]!=None:
+                    st.append(curr.children[i])
+        return postOrder[::-1]
         
