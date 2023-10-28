@@ -1,58 +1,52 @@
 #User function Template for python3
 from queue import Queue
 class Solution:
-    def parentMapping(self,root,target,parentMap):
-        targetNode=None
+    def parentMapping(self,root,parentMap,target):
         q=Queue()
         q.put(root)
+        targetNode=None
         while not q.empty():
             curr=q.get()
             if curr.data==target:
                 targetNode=curr
             if curr.left!=None:
-                q.put(curr.left)
                 parentMap[curr.left]=curr
+                q.put(curr.left)
             if curr.right!=None:
-                q.put(curr.right)
                 parentMap[curr.right]=curr
+                q.put(curr.right)
         return targetNode
-        
-                
-    def burningTime(self,targetNode,parentMap):
+    def helper(self,targetNode,parentMap):
+        q=Queue()
         time=0
-        m=Queue()
-        m.put(targetNode)
+        q.put(targetNode)
         isBurnt={targetNode:1}
-        while not m.empty():
-            size=m.qsize()
-            fireSpreaded=False
-            for i in range(0,size):
-                curr=m.get()
+        while not q.empty():
+            isSpreaded=False
+            for i in range(q.qsize()):
+                curr=q.get()
                 if curr.left!=None and isBurnt.get(curr.left,0)!=1:
-                    m.put(curr.left)
+                    q.put(curr.left)
                     isBurnt[curr.left]=1
-                    fireSpreaded=True
+                    isSpreaded=True
                 if curr.right!=None and isBurnt.get(curr.right,0)!=1:
-                    m.put(curr.right)
+                    q.put(curr.right)
                     isBurnt[curr.right]=1
-                    fireSpreaded=1
-                if parentMap[curr]!=None and isBurnt.get(parentMap[curr],0)!=1:
-                    m.put(parentMap[curr])
+                    isSpreaded=True
+                if parentMap[curr] and isBurnt.get(parentMap[curr],0)!=1:
+                    q.put(parentMap[curr])
                     isBurnt[parentMap[curr]]=1
-                    fireSpreaded=True
-            if fireSpreaded==True:
+                    isSpreaded=True
+            if isSpreaded==True:
                 time=time+1
         return time
-    
+            
     def minTime(self, root,target):
-        if root==None:
-            return 0
         parentMap={root:None}
-        targetNode=self.parentMapping(root,target,parentMap)
+        targetNode=self.parentMapping(root,parentMap,target)
         if targetNode==None:
             return 0
-        return self.burningTime(targetNode,parentMap)
-
+        return self.helper(targetNode,parentMap)
 
 
 #{ 
