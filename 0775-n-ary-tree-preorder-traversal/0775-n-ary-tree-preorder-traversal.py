@@ -7,12 +7,16 @@ class Node:
 """
 
 class Solution:
-    def helper(self,root,preOrder):
-        if root==None:
-            return None
-        preOrder.append(root.val)
-        for i in range(len(root.children)):
-            self.helper(root.children[i],preOrder)
-        return preOrder
     def preorder(self, root: 'Node') -> List[int]:
-        return self.helper(root,[])
+        if root==None:
+            return []
+        preOrder=[]
+        st=[root]
+        while st:
+            curr=st.pop()
+            preOrder.append(curr.val)
+            for i in range(len(curr.children)-1,-1,-1):
+                if curr.children[i]!=None:
+                    st.append(curr.children[i])
+        return preOrder
+        
