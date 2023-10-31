@@ -11,44 +11,25 @@ class Node:
 
 #Function to convert a binary tree to doubly linked list.
 class Solution:
-   
-    def bToDLL(self,root):
-        if root is None:
+    def helper(self,root):
+        if root==None:
             return None
-        def convert(root):
-            nonlocal prev, head
-    
-            if root is None:
-                return
-    
-            # Recursively convert the left subtree
-            convert(root.left)
-    
-            # If prev is None, this is the first node (head)
-            if prev is None:
-                head = root
-            else:
-                # Connect the previous node to the current node
-                prev.right = root
-                root.left = prev
-    
-            # Update prev to the current node
-            prev = root
-    
-            # Recursively convert the right subtree
-            convert(root.right)
-    
-        head = None
-        prev = None
-        convert(root)
-    
-        return head
-
-
-
-
-
-
+        self.helper(root.left)
+        if self.prev==None:
+            self.head=root
+        else:
+            root.left=self.prev
+            self.prev.right=root
+        self.prev=root
+        self.helper(root.right)
+    def bToDLL(self,root):
+        if root==None:
+            return None
+        self.prev=None
+        self.head=None
+        self.helper(root)
+        return self.head
+        
 
 
 
