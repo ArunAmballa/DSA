@@ -11,15 +11,14 @@
 #         self.right = right
 class Solution:
     def findSize(self,head):
-        c=0
         temp=head
+        c=0
         while temp!=None:
             c=c+1
             temp=temp.next
         return c
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         size=self.findSize(head)
-        print(size)
         def helper(n):
             nonlocal head
             if n<=0 or head==None:
@@ -31,4 +30,5 @@ class Solution:
             root.right=helper(n//2)
             return root
         return helper(size)
+        
         
