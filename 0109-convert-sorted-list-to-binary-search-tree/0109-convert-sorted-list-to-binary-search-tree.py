@@ -18,17 +18,16 @@ class Solution:
             temp=temp.next
         return c
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
-        size=self.findSize(head)
+        n=self.findSize(head)
         def helper(n):
             nonlocal head
             if n<=0 or head==None:
                 return None
-            leftTree=helper(n-1-n//2)
+            leftAns=helper(n-1-n//2)
             root=TreeNode(head.val)
-            root.left=leftTree
+            root.left=leftAns
             head=head.next
             root.right=helper(n//2)
             return root
-        return helper(size)
-        
+        return helper(n)
         
