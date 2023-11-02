@@ -14,9 +14,12 @@ class Solution:
                 return 0
             if root.val>=low and root.val<=high:
                 checkSum=checkSum+root.val
-            helper(root.left,low,high)
-            helper(root.right,low,high)
-
+                helper(root.left,low,high)
+                helper(root.right,low,high)
+            if root.val<low:
+                helper(root.right,low,high)
+            if root.val>high:
+                helper(root.left,low,high)
         checkSum=0
         helper(root,low,high)
         return checkSum
