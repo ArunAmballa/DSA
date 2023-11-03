@@ -1,7 +1,7 @@
 #User function Template for python3
 from queue import Queue
 class Solution:
-    def parentMapping(self,root,parentMap,target):
+    def parentMapping(self,root,target,d):
         q=Queue()
         q.put(root)
         targetNode=None
@@ -10,43 +10,46 @@ class Solution:
             if curr.data==target:
                 targetNode=curr
             if curr.left!=None:
-                parentMap[curr.left]=curr
+                d[curr.left]=curr
                 q.put(curr.left)
             if curr.right!=None:
-                parentMap[curr.right]=curr
+                d[curr.right]=curr
                 q.put(curr.right)
         return targetNode
-    def helper(self,targetNode,parentMap):
+        
+        
+    def burnTime(self,targetNode,d):
         q=Queue()
         time=0
         q.put(targetNode)
         isBurnt={targetNode:1}
         while not q.empty():
             isSpreaded=False
-            for i in range(q.qsize()):
+            n=q.qsize()
+            for i in range(0,n):
                 curr=q.get()
                 if curr.left!=None and isBurnt.get(curr.left,0)!=1:
-                    q.put(curr.left)
                     isBurnt[curr.left]=1
+                    q.put(curr.left)
                     isSpreaded=True
                 if curr.right!=None and isBurnt.get(curr.right,0)!=1:
-                    q.put(curr.right)
                     isBurnt[curr.right]=1
+                    q.put(curr.right)
                     isSpreaded=True
-                if parentMap[curr] and isBurnt.get(parentMap[curr],0)!=1:
-                    q.put(parentMap[curr])
-                    isBurnt[parentMap[curr]]=1
+                if d[curr]!=None and isBurnt.get(d[curr],0)!=1:
+                    isBurnt[d[curr]]=1
+                    q.put(d[curr])
                     isSpreaded=True
             if isSpreaded==True:
                 time=time+1
         return time
+                
             
     def minTime(self, root,target):
-        parentMap={root:None}
-        targetNode=self.parentMapping(root,parentMap,target)
-        if targetNode==None:
-            return 0
-        return self.helper(targetNode,parentMap)
+        d={root:None}
+        targetNode=self.parentMapping(root,target,d)
+        return self.burnTime(targetNode,d)
+
 
 
 #{ 
