@@ -19,17 +19,16 @@ class Codec:
         rightEncode=self.serialize(root.right)
         currEncode=str(root.val)+","+leftEncode+","+rightEncode
         return currEncode
+
         
-    def helper(self,dataList):
-        if len(dataList)==0:
+    def helper(self,dataList): 
+            curr=dataList.pop(0)
+            if curr=="N":
+                return None
+            root=TreeNode(curr)
+            root.left=self.helper(dataList)
+            root.right=self.helper(dataList)
             return root
-        curr=dataList.pop(0)
-        if curr=="N":
-            return None
-        root=TreeNode(curr)
-        root.left=self.helper(dataList)
-        root.right=self.helper(dataList)
-        return root
     def deserialize(self, data):
         """Decodes your encoded data to tree.
         
