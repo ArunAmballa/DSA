@@ -5,16 +5,22 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def helper(self,root):
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
         if root==None:
             return 0
-        lsum=max(self.helper(root.left),0)
-        rsum=max(self.helper(root.right),0)
-        self.maxi=max(self.maxi,(root.val+lsum+rsum))
-        print(self.maxi)
-        return max(lsum,rsum)+root.val
-    def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        self.maxi=-(1<<31)
-        self.helper(root)
-        return self.maxi
+        if root.left==None and root.right==None:
+            return root.val
+        def helper(root):
+            nonlocal maxPath
+            if root==None:
+                return -(1<<31)
+            leftCont=max(helper(root.left),0)
+            rightCont=max(helper(root.right),0)
+            maxPath=max(maxPath,leftCont+rightCont+root.val)
+            return max(leftCont,rightCont)+root.val
+        
+        maxPath=-(1<<31)
+        helper(root)
+        return maxPath
+
         
