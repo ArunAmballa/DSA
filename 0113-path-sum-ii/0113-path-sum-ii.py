@@ -5,18 +5,22 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def helper(self,root,l,ans,currSum,targetSum):
-        if root==None:
-            return None
-        l=l+[root.val]
-        currSum=currSum+root.val
-        if root.left==None and root.right==None and currSum==targetSum:
-            ans.append(l)
-            return ans
-        self.helper(root.left,l,ans,currSum,targetSum)
-        self.helper(root.right,l,ans,currSum,targetSum)
-        return ans
-
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
-        return self.helper(root,[],[],0,targetSum)
+        if root==None:
+            return []
+        def helper(root,l,currSum,targetSum):
+            nonlocal ans
+            if root==None:
+                return None
+            currSum=currSum+root.val
+            l=l+[root.val]
+            if currSum==targetSum and root.left==None and root.right==None:
+                ans.append(l)
+                return 
+            helper(root.left,l,currSum,targetSum)
+            helper(root.right,l,currSum,targetSum)
+
+        ans=[]
+        helper(root,[],0,targetSum)
+        return ans
         
