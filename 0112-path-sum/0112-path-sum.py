@@ -5,14 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def helper(self,root,targetSum,currSum):
+    def helper(self,root,currSum,targetSum):
         if root==None:
-            return None
+            return False
         currSum=currSum+root.val
-        if root.left==None and root.right==None and currSum==targetSum:
+        if currSum==targetSum and root.left==None and root.right==None:
             return True
-        return self.helper(root.left,targetSum,currSum) or self.helper(root.right,targetSum,currSum)
-
+        leftCheck=self.helper(root.left,currSum,targetSum)
+        rightCheck=self.helper(root.right,currSum,targetSum)
+        return leftCheck or rightCheck
         
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        return self.helper(root,targetSum,0)
+        return self.helper(root,0,targetSum)
+        
