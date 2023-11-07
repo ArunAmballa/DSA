@@ -26,9 +26,8 @@ class Solution:
                 prev.right=root
             prev=root
             helper(root.right)
-        
-        head=None
         prev=None
+        head=None
         helper(root)
         return head
 
