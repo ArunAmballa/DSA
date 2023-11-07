@@ -12,22 +12,24 @@
 class Solution:
     def findSize(self,head):
         temp=head
-        c=0
+        cnt=0
         while temp!=None:
-            c=c+1
+            cnt=cnt+1
             temp=temp.next
-        return c
+        return cnt
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         n=self.findSize(head)
         def helper(n):
             nonlocal head
-            if n<=0 or head==None:
+            if n<=0:
                 return None
             leftAns=helper(n-1-n//2)
             root=TreeNode(head.val)
-            root.left=leftAns
             head=head.next
-            root.right=helper(n//2)
+            root.left=leftAns
+            rightAns=helper(n//2)
+            root.right=rightAns
             return root
         return helper(n)
+
         
