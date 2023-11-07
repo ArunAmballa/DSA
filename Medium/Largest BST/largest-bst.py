@@ -5,27 +5,25 @@ class Solution:
     def largestBst(self, root):
         if root==None:
             return 0
-        def helper(node):
-            nonlocal max_size
-            if node is None:
-                return [True, 0, math.inf, -math.inf]
-
-            left_info = helper(node.left)
-            right_info = helper(node.right)
-
-            if (
-                left_info[0] and right_info[0] and
-                left_info[3] < node.data < right_info[2]
-            ):
-                # The current subtree is a valid BST
-                size = left_info[1] + right_info[1] + 1
-                max_size = max(max_size, size)
-                return [True, size, min(left_info[2], node.data), max(right_info[3], node.data)]
+        def helper(root):
+            nonlocal maxSize
+            if root==None:
+                #BST,Size,MaxValue,MinValue
+                return [True,0,-math.inf,math.inf]
+            leftAns=helper(root.left)
+            rightAns=helper(root.right)
+            if leftAns[0]==True and rightAns[0]==True and root.data>leftAns[2] and root.data<rightAns[3]:
+                currSize=leftAns[1]+rightAns[1]+1
+                maxSize=max(maxSize,currSize)
+                return [True,currSize,max(rightAns[2],root.data),min(leftAns[3],root.data)]
             else:
-                return [False, max(left_info[1], right_info[1]), None, None]
-        max_size = 0
+                return [False,max(leftAns[1],rightAns[1]),max(rightAns[2],root.data),min(leftAns[3],root.data)]
+        maxSize=0
         helper(root)
-        return max_size
+        return maxSize
+
+
+
 
 
 #{ 
