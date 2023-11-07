@@ -9,18 +9,19 @@ class Solution:
         if root==None:
             return 0
         def helper(root,low,high):
-            nonlocal checkSum
+            nonlocal valSum
             if root==None:
-                return 0
+                return 
             if root.val>=low and root.val<=high:
-                checkSum=checkSum+root.val
+                valSum=valSum+root.val
                 helper(root.left,low,high)
                 helper(root.right,low,high)
-            if root.val<low:
-                helper(root.right,low,high)
-            if root.val>high:
-                helper(root.left,low,high)
-        checkSum=0
+            else:
+                if root.val>high:
+                    helper(root.left,low,high)
+                else:
+                    helper(root.right,low,high)
+        valSum=0
         helper(root,low,high)
-        return checkSum
+        return valSum
         
