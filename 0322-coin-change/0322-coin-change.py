@@ -19,23 +19,23 @@ class Solution:
         #     return -1
         # return ans
         
-        n=len(coins)
-        w=amount
-        wt=coins
-        # prev=[0]*(w+1)
-        curr=[0]*(w+1)
-        for i in range(0,len(coins)+1):
-            for j in range(0,amount+1):
-                if j==0:
-                    curr[j]=0
+        n = len(coins)
+        w = amount
+        wt = coins
+        prev = [0] + [float('inf')] * amount  # Initialize the first row with 0 and rest with infinity
+
+        for i in range(1, n + 1):
+            curr = [0] * (amount + 1)
+            for j in range(amount + 1):
+                if j == 0:
+                    curr[j] = 0
                     continue
-                if i==0:
-                    curr[j]=1<<31
-                    continue
-                if wt[i-1]<=j:
-                    curr[j]=min(1+curr[j-wt[i-1]],prev[j])
+                if wt[i - 1] <= j:
+                    curr[j] = min(1 + curr[j - wt[i - 1]], prev[j])
                 else:
-                    curr[j]=prev[j]
-            prev=curr[:]
-        return -1 if curr[w]>amount else curr[w]
+                    curr[j] = prev[j]
+            prev = curr
+
+        return -1 if curr[w] == float('inf') else curr[w]
+
         
