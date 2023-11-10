@@ -22,7 +22,7 @@ class Solution:
         n = len(coins)
         w = amount
         wt = coins
-        prev = [0] + [float('inf')] * amount  # Initialize the first row with 0 and rest with infinity
+        prev = [0] + [float('inf')] * amount  
 
         for i in range(1, n + 1):
             curr = [0] * (amount + 1)
