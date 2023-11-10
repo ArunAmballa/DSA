@@ -10,10 +10,10 @@ class Solution:
         for i in range(0,N+1):
             for j in range(0,w+1):
                 if j==0:
-                    curr[j]=True
+                    prev[j]=True
                     continue
                 if i==0:
-                    curr[j]=False
+                    prev[j]=False
                     continue
                 if nums[i-1]<=j:
                     curr[j]=prev[j-nums[i-1]] or prev[j]
