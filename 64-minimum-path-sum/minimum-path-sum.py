@@ -14,9 +14,6 @@ class Solution:
         dp=[[0 for j in range(m)]for i in range(n)]
         for i in range(0,n):
             for j in range(0,m):
-                # if i<0 or j<0:
-                #     dp[i][j]=1<<31
-                #     continue
                 if i==0 and j==0:
                     dp[i][j]=grid[i][j]
                     continue
