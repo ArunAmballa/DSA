@@ -9,14 +9,14 @@ class Solution:
         dp[m][n]=self.helper(m-1,n,dp)+self.helper(m,n-1,dp)
         return dp[m][n]
     def uniquePaths(self, m: int, n: int) -> int:
-        dp=[[-1 for j in range(n)]for i in range(m)]
+        dp=[[0 for j in range(n)]for i in range(m)]
         # return self.helper(m-1,n-1,dp)
         for i in range(m):
             for j in range(n):
                 if i<0 or j<0:
                     dp[i][j]=0
                     continue
-                if i==0 or j==0:
+                if i==0 and j==0:
                     dp[i][j]=1
                     continue
                 dp[i][j]=dp[i-1][j]+dp[i][j-1]
