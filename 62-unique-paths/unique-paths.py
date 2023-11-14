@@ -24,3 +24,6 @@ class Solution:
                 curr[j]=prev[j]+curr[j-1]
             prev=curr
         return curr[n-1]
+
+
+        
