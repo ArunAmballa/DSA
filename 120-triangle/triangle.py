@@ -8,7 +8,6 @@ class Solution:
         return dp[i][j]
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         dp=[[-1 for j in range(len(triangle))]for i in range(len(triangle))]
-        # return self.helper(0,0,triangle,len(triangle),dp)
         n=len(triangle)
         for j in range(0,n):
             dp[n-1][j]=triangle[n-1][j]
