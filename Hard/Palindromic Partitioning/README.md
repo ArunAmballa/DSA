@@ -1,4 +1,4 @@
-<h2><a href="https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/0">Palindromic Partitioning</a></h2><h3>Difficulty Level : Hard</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a string <strong>str</strong>,&nbsp;a partitioning of the string is a&nbsp;palindrome partitioning&nbsp;if every sub-string of the partition is a palindrome.&nbsp;Determine the fewest cuts needed for palindrome partitioning of the given string.</span></p>
+<h2><a href="https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/1?utm_source=geeksforgeeks&utm_medium=newui_home&utm_campaign=potd">Palindromic Partitioning</a></h2><h3>Difficulty Level : Hard</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a string <strong>str</strong>,&nbsp;a partitioning of the string is a&nbsp;palindrome partitioning&nbsp;if every sub-string of the partition is a palindrome.&nbsp;Determine the fewest cuts needed for palindrome partitioning of the given string.</span></p>
 
 <p><br>
 <strong><span style="font-size:18px">Example 1:</span></strong></p>
