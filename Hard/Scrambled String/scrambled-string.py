@@ -6,23 +6,23 @@ class Solution:
             return True
         if len(a)!=len(b):
             return False
-        if (a+" "+b) in self.map:
+        if a+" "+b in self.map:
             return self.map[a+" "+b]
         flag=False
         n=len(a)
-        for k in range(1,len(a)):
+        for k in range(1,n):
             if (self.helper(a[:k],b[n-k:]) and self.helper(a[k:],b[:n-k])):
                 flag=True
                 break
-            elif(self.helper(a[:k],b[:k]) and self.helper(a[k:],b[k:])):
+            elif (self.helper(a[:k],b[:k])and self.helper(a[k:],b[k:])):
                 flag=True
                 break
         self.map[a+" "+b]=flag
         return self.map[a+" "+b]
-        
     def isScramble(self,S1: str, S2: str):
         self.map={}
         return self.helper(S1,S2)
+        
 
 
 
