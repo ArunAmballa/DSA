@@ -1,43 +1,42 @@
 #User function Template for python3
 
 class Solution:
-    def helper(self,i,j,isTrue,S,m,dp):
+    def helper(self,i,j,s,isTrue,m,dp):
         if i>j:
             return 0
         if i==j:
             if isTrue==True:
-                return int(S[i]=="T")
+                return int(s[i]=="T")
             else:
-                return int(S[i]=="F")
+                return int(s[i]=="F")
         if dp[i][j][isTrue]!=-1:
             return dp[i][j][isTrue]
         ans=0
-        for k in range(i+1,j):
-            LT=self.helper(i,k-1,True,S,m,dp)
-            RT=self.helper(k+1,j,True,S,m,dp)
-            LF=self.helper(i,k-1,False,S,m,dp)
-            RF=self.helper(k+1,j,False,S,m,dp)
-            if S[k]=="&":
+        for k in range(i+1,j,2):
+            lf=self.helper(i,k-1,s,False,m,dp)
+            lt=self.helper(i,k-1,s,True,m,dp)
+            rf=self.helper(k+1,j,s,False,m,dp)
+            rt=self.helper(k+1,j,s,True,m,dp)
+            if s[k]=="&":
                 if isTrue==True:
-                    ans=(ans+((LT*RT)%m))%m
+                    ans=(ans+(lt*rt)%m)%m
                 else:
-                    ans=(ans+((LT*RF)%m+(LF*RF)%m+(LF*RT)%m))%m
-            elif S[k]=="|":
-                if isTrue==False:
-                    ans=(ans+((LF*RF)%m))%m
+                    ans=(ans+(lf*rf)%m +(lt*rf)%m +(lf*rt)%m)%m
+            if s[k]=="^":
+                if isTrue==True:
+                    ans=(ans+(lf*rt)%m +(lt*rf)%m)%m
                 else:
-                    ans=(ans+((LT*RF)%m+(LT*RT)%m+(LF*RT)%m))%m
-            else:
-                if isTrue==False:
-                    ans=(ans+((LT*RT)%m+(LF*RF)%m))%m
+                    ans=(ans+(lt*rt)%m+(lf*rf)%m)%m
+            if s[k]=="|":
+                if isTrue==True:
+                    ans=(ans+(lf*rt)%m+(lt*rf)%m+(lt*rt)%m)%m
                 else:
-                    ans=(ans+((LT*RF)%m+(LF*RT)%m))%m
+                    ans=(ans+(lf*rf)%m)%m
         dp[i][j][isTrue]=ans
-        return ans
+        return dp[i][j][isTrue]
     def countWays(self, N, S):
-        m=1003
         dp=[[[-1 for k in range(2)]for j in range(N)]for i in range(N)]
-        return self.helper(0,N-1,True,S,m,dp)
+        return self.helper(0,N-1,S,True,1003,dp)
 
 
 #{ 
