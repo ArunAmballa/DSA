@@ -1,33 +1,35 @@
+from queue import Queue
 class Solution:
-    def bfs(self,r,c,image,m,n,vis,co,ic):
-        q=collections.deque()
-        q.append([r,c])
-        vis[r][c]=co
-        while q:
-            row,col=q.popleft()
-            for i in range(-1,2):
-                for j in range(-1,2):
-                    if (i==1 and j==1) or (i==-1 and j==-1) or (i==-1 and j==1) or (i==1 and j==-1):
-                        pass
-                    else:
-                        nrow=row+i
-                        ncol=col+j
-                        if (nrow>=0 and nrow<m and ncol>=0 and ncol<n and image[nrow][ncol]==ic and vis[nrow][ncol]==-1):
-                            q.append([nrow,ncol])
-                            vis[nrow][ncol]=co
-                            
-        return 
+    def bfs(self,source,image,color,initialColor,visited):
+        q=Queue()
+        q.put(source)
+        sr,sc=source
+        visited[sr][sc]=1
+        r=len(image)
+        c=len(image[0])
+        while not q.empty():
+            i,j=q.get()
+            if i-1>=0 and image[i-1][j]==initialColor and visited[i-1][j]==0:
+                q.put([i-1,j])
+                visited[i-1][j]=1
+                image[i-1][j]=color
+            if i+1<r and image[i+1][j]==initialColor and visited[i+1][j]==0:
+                q.put([i+1,j])
+                visited[i+1][j]=1
+                image[i+1][j]=color
+            if j-1>=0 and image[i][j-1]==initialColor and visited[i][j-1]==0:
+                q.put([i,j-1])
+                visited[i][j-1]=1
+                image[i][j-1]=color
+            if j+1<c and image[i][j+1]==initialColor and visited[i][j+1]==0:
+                q.put([i,j+1])
+                visited[i][j+1]=1
+                image[i][j+1]=color
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        m=len(image)
-        n=len(image[0])
-        vis=[[-1 for j in range(n)]for i in range(m)]
-        ic=image[sr][sc]
-        self.bfs(sr,sc,image,m,n,vis,color,ic)
-    
-        for i in range(0,m):
-            for j in range(0,n):
-                if vis[i][j]!=color:
-                    vis[i][j]=image[i][j]
-        return vis
+        initialColor=image[sr][sc]
+        visited=[[0 for j in range(len(image[i]))]for i in range(len(image))]
+        image[sr][sc]=color
+        self.bfs([sr,sc],image,color,initialColor,visited)
+        return image
 
         
