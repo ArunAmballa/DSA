@@ -1,19 +1,20 @@
 #User function Template for python3
 
 class Solution:
-    def dfs(self,source,adj,visited):
-        visited[source]=1
-        self.depth.append(source)
-        for ne in adj[source]:
-            if visited[ne]==0:
-                self.dfs(ne,adj,visited)
-        
+    
+    def dfs(self,src,adj):
+        self.visited[src]=1
+        self.ans.append(src)
+        for ne in adj[src]:
+            if self.visited[ne]==0:
+                self.dfs(ne,adj)
     def dfsOfGraph(self, V, adj):
-        self.depth=[]
-        visited=[0]*V
-        self.dfs(0,adj,visited)
-        return self.depth
-
+        self.visited=[0]*V
+        self.ans=[]
+        for i in range(V):
+            if self.visited[i]==0:
+                self.dfs(i,adj)
+        return self.ans
 
 
 #{ 
