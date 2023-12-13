@@ -1,34 +1,32 @@
 from typing import List
 from queue import Queue
 class Solution:
-    def bfs(self,source,adj,visited,parent):
+    #Function to detect cycle in an undirected graph.
+    def bfs(self,src,adj):
         q=Queue()
-        q.put(source)
-        visited[source]=1
-        parent[source]=-1
+        q.put(src)
+        self.visited[src]=1
         while not q.empty():
             curr=q.get()
             for ne in adj[curr]:
-                if visited[ne]==0:
+                if self.visited[ne]==0:
+                    self.p[ne]=curr
                     q.put(ne)
-                    visited[ne]=1
-                    parent[ne]=curr
+                    self.visited[ne]=1
                 else:
-                    if parent[curr]!=ne:
+                    if self.p[curr]!=ne:
                         return True
         return False
-                    
-                    
+            
 	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
-		visited=[0]*V
-		parent={}
-		ans=False
+		self.visited=[0]*V
+		self.p={0:-1}
 		for i in range(V):
-		    if visited[i]==0:
-		        ans=self.bfs(i,adj,visited,parent)
+		    if self.visited[i]==0:
+		        ans=self.bfs(i,adj)
 		        if ans==True:
-		            break
-		return ans
+		            return 1
+		return 0
 
 
 #{ 
