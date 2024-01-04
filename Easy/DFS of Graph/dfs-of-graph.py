@@ -8,13 +8,15 @@ class Solution:
         for ne in adj[src]:
             if self.visited[ne]==0:
                 self.dfs(ne,adj)
+    
     def dfsOfGraph(self, V, adj):
-        self.visited=[0]*V
         self.ans=[]
+        self.visited=[0]*V
         for i in range(V):
             if self.visited[i]==0:
                 self.dfs(i,adj)
         return self.ans
+        
 
 
 #{ 
