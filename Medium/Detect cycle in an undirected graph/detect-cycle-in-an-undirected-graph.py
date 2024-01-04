@@ -1,7 +1,7 @@
 from typing import List
 from queue import Queue
 class Solution:
-    #Function to detect cycle in an undirected graph.
+    
     def bfs(self,src,adj):
         q=Queue()
         q.put(src)
@@ -10,23 +10,26 @@ class Solution:
             curr=q.get()
             for ne in adj[curr]:
                 if self.visited[ne]==0:
-                    self.p[ne]=curr
                     q.put(ne)
                     self.visited[ne]=1
+                    self.parent[ne]=curr
                 else:
-                    if self.p[curr]!=ne:
+                    if ne!=self.parent[curr]:
                         return True
         return False
-            
+        
+        
 	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
 		self.visited=[0]*V
-		self.p={0:-1}
+		self.parent={}
 		for i in range(V):
 		    if self.visited[i]==0:
+		        self.parent[i]=-1
 		        ans=self.bfs(i,adj)
 		        if ans==True:
-		            return 1
-		return 0
+		            return True
+		return False
+		
 
 
 #{ 
