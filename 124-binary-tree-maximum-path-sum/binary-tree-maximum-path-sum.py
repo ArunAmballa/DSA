@@ -7,7 +7,7 @@
 class Solution:
     def continousPath(self,root):
         if root==None:
-            return -1<<31
+            return 0
         leftSum=max(self.continousPath(root.left),0)
         rightSum=max(self.continousPath(root.right),0)
         self.ans=max(self.ans,leftSum+rightSum+root.val)
