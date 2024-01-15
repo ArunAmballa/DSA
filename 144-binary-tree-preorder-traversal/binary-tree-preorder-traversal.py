@@ -23,7 +23,7 @@ class Solution:
                     preorder.append(curr.val)
                     curr=curr.left
                 else:
-                    pred.right=None
+                    # pred.right=None
                     curr=curr.right
         return preorder
         
