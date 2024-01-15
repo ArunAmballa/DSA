@@ -5,19 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def CBT(self,preorder,inorder,lo,hi,d):
-        if lo>hi:
-            return None
-        ele=preorder[0]
-        preorder.pop(0)
-        root=TreeNode(ele)
-        index=d[ele]
-        root.left=self.CBT(preorder,inorder,lo,index-1,d)
-        root.right=self.CBT(preorder,inorder,index+1,hi,d)
-        return root
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         d={}
         for i in range(len(inorder)):
             d[inorder[i]]=i
-        return self.CBT(preorder,inorder,0,len(preorder)-1,d)
+        def CBT(inorder,preorder,lo,hi):
+            nonlocal index
+            if lo>hi or index>len(preorder)-1:
+                return None
+            ele=preorder[index]
+            index=index+1
+            root=TreeNode(ele)
+            ind=d[ele]
+            root.left=CBT(inorder, preorder, lo, ind-1)
+            root.right=CBT(inorder, preorder, ind+1, hi)
+            return root
+        index=0
+        return CBT(inorder,preorder,0,len(preorder))
         
