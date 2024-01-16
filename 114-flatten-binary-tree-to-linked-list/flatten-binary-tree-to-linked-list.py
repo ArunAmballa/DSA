@@ -9,17 +9,17 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        curr=root
-        while curr!=None:
-            if curr.left==None:
-                curr=curr.right
-            else:
-                pred=curr.left
-                while pred.right!=None:
-                    pred=pred.right
-                if pred.right==None:
-                    pred.right=curr.right
-                    curr.right=curr.left
-                    curr.left=None
-        return root
-        
+        if root==None:
+            return None
+        st=[]
+        st.append(root)
+        while st:
+            curr=st.pop()
+            if curr.right!=None:
+                st.append(curr.right)
+            if curr.left!=None:
+                st.append(curr.left)
+            if st:
+                curr.right=st[-1]
+            curr.left=None
+    
