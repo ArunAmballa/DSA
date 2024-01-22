@@ -18,7 +18,7 @@ class Solution:
             elif nums[mid]>nums[mid+1]:
                 hi=mid-1
             else:
-                lo=mid+1
+                hi=mid-1
         return -1
         
 
