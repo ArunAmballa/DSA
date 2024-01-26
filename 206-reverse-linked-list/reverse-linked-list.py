@@ -11,10 +11,11 @@ class Solution:
             return None
         st=[]
         while head!=None:
-            st.append(head.val)
+            st.append(head)
             head=head.next
         while st:
             curr=st.pop()
-            temp.next=ListNode(curr)
+            temp.next=curr
             temp=temp.next
+        temp.next=None
         return dummy.next
