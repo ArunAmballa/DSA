@@ -17,8 +17,8 @@ class Solution:
                     if d[s[st]]==0:
                         del d[s[st]]
                     st=st+1
-                if len(d)<k:
-                    ans=max(ans,e-st+1)
+                # if len(d)<k:
+                #     ans=max(ans,e-st+1)
                 e=e+1
         return ans
         
