@@ -13,7 +13,8 @@ class Solution:
                 while preSum > goal and s<=e:
                     preSum=preSum-nums[s]
                     s=s+1
-                ans+=e-s+1
+                if preSum<=goal:
+                    ans+=e-s+1
                 e=e+1
         return ans
 
