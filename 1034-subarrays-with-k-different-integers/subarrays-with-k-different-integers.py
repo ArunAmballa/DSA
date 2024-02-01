@@ -10,7 +10,7 @@ class Solution:
                 ans=ans+(e-s+1)
                 e=e+1
             else:
-                while len(d)>k:
+                while len(d)>k and s<=e:
                     d[nums[s]]=d.get(nums[s],0)-1
                     if d[nums[s]]==0:
                         del d[nums[s]]
