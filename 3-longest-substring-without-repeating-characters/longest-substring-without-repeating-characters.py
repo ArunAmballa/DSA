@@ -12,7 +12,7 @@ class Solution:
                 d[s[e]]=d.get(s[e],0)+1
                 e=e+1
             else:
-                while s[e] in d:
+                while s[e] in d and st<=e:
                     d[s[st]]=d.get(s[st],0)-1
                     if d[s[st]]==0:
                         del d[s[st]]
