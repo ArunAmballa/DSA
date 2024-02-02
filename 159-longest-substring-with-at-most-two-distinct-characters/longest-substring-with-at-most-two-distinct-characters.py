@@ -10,7 +10,7 @@ class Solution:
                 ans=max(ans,e-st+1)
                 e=e+1
             else:
-                while len(d)>2:
+                while len(d)>2 and st<=e:
                     d[s[st]]=d.get(s[st],0)-1
                     if d[s[st]]==0:
                         del d[s[st]]
