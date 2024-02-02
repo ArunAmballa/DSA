@@ -11,7 +11,7 @@ class Solution:
                 ans=max(ans,e-s+1)
                 e=e+1
             else:
-                while cnt>k:
+                while cnt>k and s<=e:
                     if nums[s]==0:
                         cnt=cnt-1
                     s=s+1
