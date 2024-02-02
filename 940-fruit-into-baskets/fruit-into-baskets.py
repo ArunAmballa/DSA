@@ -12,7 +12,7 @@ class Solution:
                 ans=max(ans,e-s+1)
                 e=e+1
             else:
-                while len(d)>2:
+                while len(d)>2 and s<=e:
                     d[fruits[s]]=d.get(fruits[s],0)-1
                     if d[fruits[s]]==0:
                         del d[fruits[s]]
