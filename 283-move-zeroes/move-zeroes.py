@@ -3,21 +3,22 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        lo=-1
-        for i in range(len(nums)):
+        ind=-1
+        i=0
+        while i<len(nums):
             if nums[i]==0:
-                lo=i
+                ind=i
                 break
-
-        if lo==-1:
-            return nums
-        hi=lo+1
-        while hi<len(nums):
-            if nums[hi]!=0:
-                nums[lo],nums[hi]=nums[hi],nums[lo]
-                lo=lo+1
-                hi=hi+1
             else:
-                hi=hi+1
-        return nums
-        
+                i=i+1
+        if ind==-1:
+            return 
+        j=ind+1
+        while j<len(nums):
+            if nums[j]!=0:
+                nums[ind],nums[j]=nums[j],nums[ind]
+                ind=ind+1
+                j=j+1
+            else:
+                j=j+1
+        return 
