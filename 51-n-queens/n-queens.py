@@ -1,29 +1,4 @@
 class Solution:
-    def isSafe(self,board,col,row,n):
-        originalRow=row
-        originalCol=col
-
-        while (col>=0):
-            if board[row][col]=="Q":
-                return False
-            col=col-1
-        row=originalRow
-        col=originalCol
-        while (row>=0 and col>=0):
-            if board[row][col]=="Q":
-                return False
-            row=row-1
-            col=col-1
-        
-        row=originalRow
-        col=originalCol
-        while(row<n and col>=0):
-            if board[row][col]=="Q":
-                return False
-            row=row+1
-            col=col-1
-        
-        return True
 
     def helper(self,n,col,board,ans,leftRow,lowerDiagonal,upperDiagonal):
         if col==n:
