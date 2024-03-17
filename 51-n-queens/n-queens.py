@@ -34,9 +34,7 @@ class Solution:
                 board[row]=board[row][:col]+"Q"+board[row][col+1:]
                 self.helper(n,col+1,board,ans)
                 board[row]=board[row][:col]+"."+board[row][col+1:]
-            
-
-        
+                 
     def solveNQueens(self, n: int) -> List[List[str]]:
         ans=[]
         board=["."*n for i in range(n)]
