@@ -11,17 +11,19 @@ class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         n=len(triangle)
         m=len(triangle[n-1])
-        dp=[[-1 for j in range(m)]for i in range(n)]
+        prev=[0 for j in range(m)]
         for i in range(n-1,-1,-1):
+            temp=[0]*m
             for j in range(i,-1,-1):
                 if i==n-1:
-                    dp[i][j]=triangle[i][j]
+                    temp[j]=triangle[i][j]
                 else:
-                    down=triangle[i][j]+dp[i+1][j]
-                    downRight=triangle[i][j]+dp[i+1][j+1]
-                    dp[i][j]=min(down,downRight)
-        return dp[0][0]
+                    down=triangle[i][j]+prev[j]
+                    downRight=triangle[i][j]+prev[j+1]
+                    temp[j]=min(down,downRight)
+            prev=temp
+        return prev[0]
 
 
-        return self.helper(0,0,n-1,triangle,dp)
+    
         
