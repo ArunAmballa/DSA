@@ -9,9 +9,9 @@ class Solution:
                 else:
                     top=0
                     left=0
-                    if i>=0:
+                    if i>0:
                         top=prev[j]
-                    if j>=0:
+                    if j>0:
                         left=temp[j-1]
                     temp[j]=top+left
             prev=temp
