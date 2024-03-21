@@ -1,6 +1,6 @@
 class Solution:
     def helper(self,n,m,dp):
-        if n==0 and m==0:
+        if n==0 or m==0:
             return 1
         if n<0 or m<0:
             return 0
@@ -12,5 +12,9 @@ class Solution:
         return dp[n][m]
     def uniquePaths(self, n: int, m: int) -> int:
         dp=[[-1 for j in range(m)] for i in range(n)]
+        # for i in range(0,n):
+        #     for j in range(0,m):
+        #         if i==0 and 
+
         return self.helper(n-1,m-1,dp)
         
