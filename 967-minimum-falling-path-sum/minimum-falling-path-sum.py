@@ -15,24 +15,26 @@ class Solution:
         ans=1<<31
         n=len(matrix)
         m=len(matrix[0])
-        dp=[[-1 for j in range(m)]for i in range(n)]
+        prev=[0 for j in range(m)]
         for i in range(0,n):
+            temp=[0]*m
             for j in range(0,m):
                 if i==0:
-                    dp[i][j]=matrix[i][j]
+                    temp[j]=matrix[i][j]
                 else:
-                    top=matrix[i][j]+dp[i-1][j]
+                    top=matrix[i][j]+prev[j]
                     if j+1<n:
-                        topRight=matrix[i][j]+dp[i-1][j+1]
+                        topRight=matrix[i][j]+prev[j+1]
                     else:
                         topRight=1<<31
                     if j-1>=0:
-                        topLeft=matrix[i][j]+dp[i-1][j-1]
+                        topLeft=matrix[i][j]+prev[j-1]
                     else:
                         topLeft=1<<31
-                    dp[i][j]=min(top,min(topLeft,topRight))
+                    temp[j]=min(top,min(topLeft,topRight))
+            prev=temp
         for j in range(0,m):
-            ans=min(ans,dp[n-1][j])            
+            ans=min(ans,prev[j])            
         return ans
         
         
