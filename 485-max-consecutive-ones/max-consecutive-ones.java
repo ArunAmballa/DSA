@@ -6,10 +6,11 @@ class Solution {
         for(int i=0;i<nums.length;i++){
             if(nums[i]==1){
                 count+=1;
+                maximum=Math.max(maximum,count);
             }else{
                 count=0;
             }
-            maximum=Math.max(maximum,count);
+            
         }
         return maximum;
         
