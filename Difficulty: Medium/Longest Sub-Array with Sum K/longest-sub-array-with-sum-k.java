@@ -47,10 +47,8 @@ class Solution {
     // Function for finding maximum and value pair
     public static int lenOfLongSubarr(int A[], int N, int K) {
         
-        int prefixSum=0;
-        
         int maxLength=0;
-        
+        int prefixSum=0;
         HashMap<Integer,Integer> indexMap=new HashMap<>();
         indexMap.put(0,-1);
         
