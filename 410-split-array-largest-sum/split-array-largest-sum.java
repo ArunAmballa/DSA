@@ -1,5 +1,4 @@
 class Solution {
-
     public int findMax(int []nums){
         int maxi=Integer.MIN_VALUE;
         for(int i=0;i<nums.length;i++){
@@ -7,7 +6,6 @@ class Solution {
         }
         return maxi;
     }
-
     public int findSum(int []nums){
         int sum=0;
         for(int i=0;i<nums.length;i++){
@@ -28,21 +26,17 @@ class Solution {
         return numberOfSubarray+1;
     }
     public int splitArray(int[] nums, int k) {
-        
         int low=findMax(nums);
         int high=findSum(nums);
-        int ans=-1;
         while(low<=high){
             int mid=low+(high-low)/2;
             int numberOfSubArrays=helper(nums,mid);
             if(numberOfSubArrays<=k){
-                ans=mid;
                 high=mid-1;
             }else{
                 low=mid+1;
             }
         }
-
-        return ans;
+        return low;
     }
 }
