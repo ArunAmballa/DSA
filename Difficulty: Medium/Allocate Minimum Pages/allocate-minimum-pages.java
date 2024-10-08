@@ -75,14 +75,13 @@ class Solution {
             long mid=low+(high-low)/2;
             long numberOfStudents=helper(arr,mid);
             if(numberOfStudents<=m){
-                ans=mid;
                 high=mid-1;
             }else{
                 low=mid+1;
             }
         }
         
-        return ans;
+        return low;
         
     }
 };
