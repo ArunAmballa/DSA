@@ -15,6 +15,8 @@ class Solution {
                     hs.remove(s.charAt(low));
                     low=low+1;
                 }
+                hs.add(s.charAt(high));
+                high=high+1;
                 maxi=Math.max(maxi,hs.size());
             }
         }
