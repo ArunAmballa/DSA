@@ -3,20 +3,15 @@ class Solution {
         int length=s.length();
         int left=0;
         int right=0;
-        HashMap<Character,Integer> map=new HashMap<>();
+        int []hash=new int[256];
+        Arrays.fill(hash,-1);
         int maxi=0;
         while(right<length){
-            map.put(s.charAt(right),map.getOrDefault(s.charAt(right),0)+1);
-            while(map.size()<right-left+1){
-                map.put(s.charAt(left),map.get(s.charAt(left))-1);
-                if(map.get(s.charAt(left))==0){
-                    map.remove(s.charAt(left));
-                }
-                left=left+1;
+            if(hash[s.charAt(right)]!=-1){
+                left=Math.max(left,hash[s.charAt(right)]+1);
             }
-            if(map.size()==right-left+1){
-                maxi=Math.max(maxi,right-left+1);
-            }
+            maxi=Math.max(maxi,right-left+1);
+            hash[s.charAt(right)]=right;
             right++;
         }
         return maxi;
