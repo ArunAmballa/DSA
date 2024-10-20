@@ -3,7 +3,7 @@ class Solution {
         if(nums.length<k){
             return 0.0;
         }
-        double maxi=-10000000;
+        double maxi=-1000000;
         int sum=0;
         for(int i=0;i<k;i++){
             sum=sum+nums[i];
