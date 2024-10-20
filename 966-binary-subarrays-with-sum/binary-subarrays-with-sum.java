@@ -1,5 +1,8 @@
 class Solution {
     public int helper(int []nums,int k){
+        if(k<0){
+            return 0;
+        }
         int length=nums.length;
         int left=0;
         int right=0;
@@ -7,13 +10,11 @@ class Solution {
         int sum=0;
         while(right<length){
             sum+=nums[right];
-            while(sum>k && left<right){
+            while(sum>k){
                 sum-=nums[left];
                 left=left+1;
             }
-            if(sum<=k){
-                count+=(right-left+1);
-            }
+            count+=(right-left+1);
             right++;
         }
         return count;
